@@ -17,7 +17,7 @@ const ARCH_MAPPING = {
     "arm": "arm"
 };
 
-// Mapping between Node's `process.platform` to Golang's 
+// Mapping between Node's `process.platform` to Golang's
 const PLATFORM_MAPPING = {
     "darwin": "darwin",
     "linux": "linux",
@@ -27,8 +27,9 @@ const PLATFORM_MAPPING = {
 
 function getInstallationPath(callback) {
 
-    // `npm bin` will output the path where binary files should be installed
-    exec("npm bin", function(err, stdout, stderr) {
+    // `$npm_execpath bin` will output the path where binary files should be installed
+    // using whichever package manager is current
+    exec("$npm_execpath bin", function(err, stdout, stderr) {
 
         let dir =  null;
         if (err || stderr || !stdout || stdout.length === 0)  {
